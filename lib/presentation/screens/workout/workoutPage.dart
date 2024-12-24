@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:se215_nutrifit/core/configs/theme/app_colors.dart';
+import 'package:se215_nutrifit/presentation/screens/workout/exercise/preExercise.dart';
 
 class WorkoutPage extends StatelessWidget {
   @override
@@ -164,40 +165,86 @@ class WorkoutPage extends StatelessWidget {
   }
 }
 
-class pickWeek extends StatelessWidget {
+class pickWeek extends StatefulWidget {
   final String week;
 
-  const pickWeek({
-    required this.week,
-  });
+  const pickWeek({required this.week});
+
+  @override
+  _pickWeekState createState() => _pickWeekState();
+}
+
+class _pickWeekState extends State<pickWeek> {
+  String displayedWeek = "Tuần này";
+
+  @override
+  void initState() {
+    super.initState();
+    displayedWeek = widget.week; // Khởi tạo giá trị tuần mặc định
+  }
+
+  Future<void> _selectWeek(BuildContext context) async {
+    DateTime now = DateTime.now();
+    DateTime firstDayOfWeek = now.subtract(Duration(days: now.weekday - 1));
+    DateTime lastDayOfWeek = firstDayOfWeek.add(const Duration(days: 6));
+
+    DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: now,
+      firstDate: DateTime(2020),
+      lastDate: DateTime(2100),
+    );
+
+    if (picked != null) {
+      DateTime pickedFirstDay =
+          picked.subtract(Duration(days: picked.weekday - 1));
+      DateTime pickedLastDay = pickedFirstDay.add(const Duration(days: 6));
+
+      setState(() {
+        if (pickedFirstDay.isBefore(now) && pickedLastDay.isAfter(now)) {
+          displayedWeek = "Tuần này";
+        } else {
+          displayedWeek =
+              "${_formatDate(pickedFirstDay)} - ${_formatDate(pickedLastDay)}";
+        }
+      });
+    }
+  }
+
+  String _formatDate(DateTime date) {
+    return "${date.day}/${date.month}";
+  }
 
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Color.fromARGB(255, 239, 249, 249),
+        color: const Color.fromARGB(255, 239, 249, 249),
         borderRadius: BorderRadius.circular(10.0),
         border: Border.all(color: const Color(0xFFE0E0E0), width: 1.0),
       ),
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0),
-        child: Row(children: [
-          Text(week,
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black,
-                  fontSize: 16)),
-          Spacer(),
-          IconButton(
-            icon: const Icon(
-              Icons.calendar_today,
-              color: AppColors.xanh_ngoc_nhat,
+        child: Row(
+          children: [
+            Text(
+              displayedWeek,
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                color: AppColors.xanh_ngoc_dam,
+                fontSize: 16,
+              ),
             ),
-            onPressed: () {
-              // Add your onPressed code here!
-            },
-          ),
-        ]),
+            const Spacer(),
+            IconButton(
+              icon: const Icon(
+                Icons.calendar_today,
+                color: AppColors.xanh_ngoc_nhat,
+              ),
+              onPressed: () => _selectWeek(context),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -220,40 +267,50 @@ class WorkoutDayWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: isToday ? Color(0xffE9F6F6) : Color.fromARGB(255, 255, 255, 255),
-        borderRadius: BorderRadius.circular(10.0),
-        border: Border.all(
-            color: isToday ? AppColors.xanh_ngoc_nhat : const Color(0xFFE0E0E0),
-            width: 1.0),
-      ),
-      child: ListTile(
-        title: Text(
-          day,
-          style: TextStyle(
-              fontWeight: FontWeight.bold,
-              color: (isCompleted)
-                  ? AppColors.xanh_ngoc_nhat
-                  : (isToday)
-                      ? AppColors.xanh_ngoc_dam
-                      : !beforeToday
-                          ? AppColors.xam_thuong
-                          : Colors.black),
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => PreExerciseScreen()),
+        );
+      },
+      child: Container(
+        decoration: BoxDecoration(
+          color:
+              isToday ? Color(0xffE9F6F6) : Color.fromARGB(255, 255, 255, 255),
+          borderRadius: BorderRadius.circular(10.0),
+          border: Border.all(
+              color:
+                  isToday ? AppColors.xanh_ngoc_nhat : const Color(0xFFE0E0E0),
+              width: 1.0),
         ),
-        subtitle: Text(status,
+        child: ListTile(
+          title: Text(
+            day,
             style: TextStyle(
-              color: (isCompleted || isToday)
-                  ? AppColors.xanh_ngoc_nhat
-                  : AppColors.xam_thuong,
-            )),
-        trailing: isToday
-            ? const Icon(Icons.chevron_right, color: AppColors.xanh_ngoc_nhat)
-            : isCompleted
-                ? const Icon(Icons.check, color: AppColors.xanh_ngoc_nhat)
-                : !beforeToday
-                    ? const Icon(Icons.close, color: AppColors.xam_thuong)
-                    : null,
+                fontWeight: FontWeight.bold,
+                color: (isCompleted)
+                    ? AppColors.xanh_ngoc_nhat
+                    : (isToday)
+                        ? AppColors.xanh_ngoc_dam
+                        : !beforeToday
+                            ? AppColors.xam_thuong
+                            : Colors.black),
+          ),
+          subtitle: Text(status,
+              style: TextStyle(
+                color: (isCompleted || isToday)
+                    ? AppColors.xanh_ngoc_nhat
+                    : AppColors.xam_thuong,
+              )),
+          trailing: isToday
+              ? const Icon(Icons.chevron_right, color: AppColors.xanh_ngoc_nhat)
+              : isCompleted
+                  ? const Icon(Icons.check, color: AppColors.xanh_ngoc_nhat)
+                  : !beforeToday
+                      ? const Icon(Icons.close, color: AppColors.xam_thuong)
+                      : null,
+        ),
       ),
     );
   }
