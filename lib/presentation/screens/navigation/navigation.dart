@@ -16,27 +16,28 @@ class Navigation extends StatefulWidget {
 
 class _NavigationState extends State<Navigation> {
   int userId = 0;
-  String Useravatar = "";
+  String userAvatar = "";
   Future<void> userID() async {}
 
   int currentPageIndex = 0;
+
   @override
   void initState() {
     super.initState();
-
     currentPageIndex = widget.tab ?? 0;
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        bottomNavigationBar: _navigationBar(),
-        body: [
-          HomePage(),
-          WorkoutPage(),
-          RecipePage(),
-          PlanPage(),
-        ][currentPageIndex]);
+      bottomNavigationBar: _navigationBar(),
+      body: [
+        HomePage(),
+        WorkoutPage(),
+        RecipePage(),
+        PlanPage(),
+      ][currentPageIndex],
+    );
   }
 
   Widget _navigationBar() {
@@ -46,15 +47,11 @@ class _NavigationState extends State<Navigation> {
           currentPageIndex = index;
         });
       },
-      height: 50,
+      height: 70, // Adjust height for better alignment
       backgroundColor: Colors.white,
       indicatorColor: Colors.transparent,
-      // indicatorShape: const Border(
-      //   top: BorderSide(
-      //     color: AppColors.xanh_main,
-      //     width: 4,
-      //   ),
-      // ),
+      labelBehavior:
+          NavigationDestinationLabelBehavior.alwaysHide, // Hide labels
       destinations: const [
         NavigationDestination(
           selectedIcon: Icon(
@@ -86,7 +83,7 @@ class _NavigationState extends State<Navigation> {
           selectedIcon: Icon(
             Icons.restaurant,
             color: AppColors.xanh_ngoc_nhat,
-            size: 40,
+            size: 30,
           ),
           icon: Icon(
             Icons.restaurant,
