@@ -1,7 +1,7 @@
-// import 'dart:ui';
+import 'dart:ui';
 
 class AppColors {
-  // static const xanh_main = Color(0xff4AB7B6);
+  static const xanh_ngoc_nhat = Color(0xff4AB7B6);
   // static const cam_main = Color(0xffFFA551);
   // static const do_main = Color(0xffE95F61);
   // static const xam_nhat = Color(0xffC5C5C5);
