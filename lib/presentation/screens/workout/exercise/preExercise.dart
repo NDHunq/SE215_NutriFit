@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:se215_nutrifit/core/configs/theme/app_colors.dart';
-import 'package:flutter_gif/flutter_gif.dart';
 
 class PreExerciseScreen extends StatefulWidget {
   @override
