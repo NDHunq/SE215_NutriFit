@@ -3,6 +3,7 @@ import 'package:se215_nutrifit/data/models/buoi.dart';
 
 import '../../../common/widgets/card/buoiCard.dart';
 import '../../../core/configs/theme/app_colors.dart';
+import 'detailFood.dart';
 
 class OneRecipe extends StatefulWidget {
   const OneRecipe({super.key});
@@ -177,37 +178,47 @@ class foodCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10.0),
-      child: Card(
-        child: ListTile(
-          title: const Text(
-            'Bánh mì',
-            style: TextStyle(
-              fontSize: 15,
-              fontWeight: FontWeight.bold,
-              color: AppColors.xanh_ngoc_dam,
-            ),
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const DetailFood(),
           ),
-          subtitle: const Text(
-            '200 kcal',
-            style: TextStyle(
-              fontSize: 14,
-              color: AppColors.xam_thuong,
+        );
+      },
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 10.0),
+        child: Card(
+          child: ListTile(
+            title: const Text(
+              'Bánh mì',
+              style: TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.bold,
+                color: AppColors.xanh_ngoc_dam,
+              ),
             ),
-          ),
-          leading: Container(
-              width: 70,
-              height: 70,
-              child: ClipRRect(
-                  borderRadius: BorderRadius.circular(8.0),
-                  child: Image.asset(
-                    'assets/images/album2.jpg',
-                    fit: BoxFit.fitHeight,
-                  ))),
-          trailing: IconButton(
-            icon: const Icon(Icons.arrow_forward_ios_rounded),
-            onPressed: () {},
+            subtitle: const Text(
+              '200 kcal',
+              style: TextStyle(
+                fontSize: 14,
+                color: AppColors.xam_thuong,
+              ),
+            ),
+            leading: Container(
+                width: 70,
+                height: 70,
+                child: ClipRRect(
+                    borderRadius: BorderRadius.circular(8.0),
+                    child: Image.asset(
+                      'assets/images/album2.jpg',
+                      fit: BoxFit.fitHeight,
+                    ))),
+            trailing: IconButton(
+              icon: const Icon(Icons.arrow_forward_ios_rounded),
+              onPressed: () {},
+            ),
           ),
         ),
       ),
