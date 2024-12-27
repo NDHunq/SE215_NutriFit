@@ -4,6 +4,7 @@ class AppColors {
   static const xanh_ngoc_nhat = Color(0xff4AB7B6);
   static const xanh_ngoc_dam = Color(0xff007271);
   static const xam_thuong = Color(0xff757575);
+  static const xam_nhat = Color(0xFFF0F0F0);
   // static const do_main = Color(0xffE95F61);
   // static const xam_nhat = Color(0xffC5C5C5);
   // static const xam_icon = Color(0xff383838);

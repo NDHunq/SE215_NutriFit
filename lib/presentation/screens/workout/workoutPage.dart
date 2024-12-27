@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:se215_nutrifit/core/configs/theme/app_colors.dart';
 import 'package:se215_nutrifit/presentation/screens/workout/exercise/preExercise.dart';
+import 'package:se215_nutrifit/presentation/screens/workout/historyPage.dart';
 
 class WorkoutPage extends StatelessWidget {
   @override
@@ -46,7 +47,11 @@ class WorkoutPage extends StatelessWidget {
                         color: AppColors.xanh_ngoc_nhat,
                       ),
                       onPressed: () {
-                        // Add your onPressed code here!
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => HistoryPage()),
+                        );
                       },
                     ),
                   ],

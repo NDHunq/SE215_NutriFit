@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:se215_nutrifit/core/configs/theme/app_colors.dart';
-import 'package:flutter_gif/flutter_gif.dart';
+import 'package:se215_nutrifit/presentation/screens/workout/exercise/startScreen.dart';
 
 class PreExerciseScreen extends StatefulWidget {
   @override
@@ -95,7 +95,7 @@ class _PreExerciseScreenState extends State<PreExerciseScreen> {
             Material(
               child: Container(
                 padding: const EdgeInsets.fromLTRB(0, 5, 0, 10),
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
                     bottomLeft: Radius.circular(15),
@@ -146,7 +146,7 @@ class _PreExerciseScreenState extends State<PreExerciseScreen> {
                     const SizedBox(height: 8.0),
                     Container(
                       height: MediaQuery.of(context).size.height - 395,
-                      child: SingleChildScrollView(
+                      child: const SingleChildScrollView(
                         child: Column(
                           children: [
                             ex(),
@@ -168,7 +168,7 @@ class _PreExerciseScreenState extends State<PreExerciseScreen> {
               ),
             ),
             Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Colors.white,
               ),
               child: Align(
@@ -176,7 +176,12 @@ class _PreExerciseScreenState extends State<PreExerciseScreen> {
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => StartScreen()),
+                      );
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0XffE9F6F6),
                       side: const BorderSide(color: AppColors.xanh_ngoc_nhat),
@@ -215,15 +220,17 @@ class ex extends StatelessWidget {
           Material(
             child: ListTile(
               tileColor: Colors.white,
-              leading: Row(
-                children: [],
+              leading: Image.asset(
+                "assets/images/ani.gif",
+                height: 125.0,
+                width: 80.0,
               ),
               title: const Text("Gập người",
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
               subtitle: const Text("00:20"),
             ),
           ),
-          SizedBox(height: 5),
+          const SizedBox(height: 5),
           const Divider(
             height: 0,
             thickness: 1,
