@@ -4,12 +4,15 @@ import 'package:se215_nutrifit/common/widgets/button/sizedbutton.dart';
 import 'package:se215_nutrifit/data/models/buoi.dart';
 
 import '../../../core/configs/theme/app_colors.dart';
+import '../../../presentation/screens/recipe/oneRecipe.dart';
 
 class Buoi extends StatefulWidget {
   final BuoiModel buoi;
+  final isHaveBackgroundColor;
   const Buoi({
     super.key,
     required this.buoi,
+    this.isHaveBackgroundColor = true,
   });
 
   @override
@@ -32,9 +35,11 @@ class BuoiState extends State<Buoi> {
 
     return GestureDetector(
       onTap: () {
-        setState(() {
-          isExpanded = !isExpanded;
-        });
+        if (widget.isHaveBackgroundColor) {
+          setState(() {
+            isExpanded = !isExpanded;
+          });
+        }
       },
       child: isExpanded
           ? Padding(
@@ -51,46 +56,85 @@ class BuoiState extends State<Buoi> {
                     children: [
                       Column(
                         children: [
-                          Align(
-                            alignment: Alignment.topLeft,
-                            child: Text.rich(
-                              TextSpan(
+                          Container(
+                            decoration: BoxDecoration(
+                              color: AppColors.xam_nhat,
+                              borderRadius: BorderRadius.circular(7),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
-                                  TextSpan(
-                                    text: widget.buoi.buoi,
-                                    style: const TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
-                                      color: AppColors.xanh_ngoc_dam,
-                                    ),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Align(
+                                        alignment: Alignment.topLeft,
+                                        child: Text.rich(
+                                          TextSpan(
+                                            children: [
+                                              TextSpan(
+                                                text: widget.buoi.buoi,
+                                                style: const TextStyle(
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.bold,
+                                                  color:
+                                                      AppColors.xanh_ngoc_dam,
+                                                ),
+                                              ),
+                                              TextSpan(
+                                                text: buoii.toString(),
+                                                style: const TextStyle(
+                                                  fontSize: 16,
+                                                  color: AppColors.xam_thuong,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                      Row(
+                                        children: [
+                                          Text(
+                                              widget.buoi.kcal.toString() +
+                                                  ' Kcal',
+                                              style: const TextStyle(
+                                                  color: AppColors.xam_thuong)),
+                                          const SizedBox(width: 15),
+                                          Text(
+                                              widget.buoi.time.toString() +
+                                                  ' phút chế biến',
+                                              style: const TextStyle(
+                                                  color: AppColors.xam_thuong)),
+                                          const SizedBox(width: 15),
+                                          Text(
+                                              widget.buoi.price.toString() +
+                                                  ' đ',
+                                              style: const TextStyle(
+                                                  color: AppColors.xam_thuong)),
+                                        ],
+                                      )
+                                    ],
                                   ),
-                                  TextSpan(
-                                    text: buoii.toString(),
-                                    style: const TextStyle(
-                                      fontSize: 16,
-                                      color: AppColors.xam_thuong,
+                                  GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        isFavorite = !isFavorite;
+                                      });
+                                    },
+                                    child: Icon(
+                                      Icons.favorite_rounded,
+                                      color: isFavorite
+                                          ? AppColors.xanh_ngoc_nhat
+                                          : AppColors.xam_thuong,
                                     ),
                                   ),
                                 ],
                               ),
                             ),
-                          ),
-                          Row(
-                            children: [
-                              Text(widget.buoi.kcal.toString() + ' Kcal',
-                                  style: const TextStyle(
-                                      color: AppColors.xam_thuong)),
-                              const SizedBox(width: 15),
-                              Text(
-                                  widget.buoi.time.toString() +
-                                      ' phút chế biến',
-                                  style: const TextStyle(
-                                      color: AppColors.xam_thuong)),
-                              const SizedBox(width: 15),
-                              Text(widget.buoi.price.toString() + ' đ',
-                                  style: const TextStyle(
-                                      color: AppColors.xam_thuong)),
-                            ],
                           ),
                           const SizedBox(
                             height: 10,
@@ -125,17 +169,17 @@ class BuoiState extends State<Buoi> {
                             height: 10,
                           ),
                           Sizedbutton(
-                            onPressFun: () {
-                              setState(() {
-                                isFavorite = !isFavorite;
-                              });
-                            },
-                            text: isFavorite ? "Hủy yêu thích " : "Yêu thích",
-                            width: double.infinity,
-                            backgroundColor: isFavorite
-                                ? AppColors.xanh_ngoc_nhat
-                                : AppColors.xam_thuong,
-                          )
+                              onPressFun: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const OneRecipe(),
+                                  ),
+                                );
+                              },
+                              text: "Xem chi tiết",
+                              width: double.infinity,
+                              backgroundColor: AppColors.xanh_ngoc_nhat)
                         ],
                       ),
                     ],
@@ -147,7 +191,9 @@ class BuoiState extends State<Buoi> {
               padding: const EdgeInsets.only(bottom: 10),
               child: Container(
                 decoration: BoxDecoration(
-                  color: AppColors.xam_nhat,
+                  color: widget.isHaveBackgroundColor
+                      ? AppColors.xam_nhat
+                      : Colors.transparent,
                   borderRadius: BorderRadius.circular(7),
                 ),
                 child: Padding(
@@ -156,6 +202,7 @@ class BuoiState extends State<Buoi> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Align(
                             alignment: Alignment.topLeft,

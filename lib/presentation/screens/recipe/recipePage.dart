@@ -15,7 +15,11 @@ class _RecipePageState extends State<RecipePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Dinh dưỡng'),
+        title: const Text('Dinh dưỡng',
+            style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w600,
+                color: AppColors.xanh_ngoc_dam)),
       ),
       body: SingleChildScrollView(
         child: Column(
