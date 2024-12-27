@@ -4,6 +4,7 @@ import 'package:se215_nutrifit/common/widgets/button/sizedbutton.dart';
 import 'package:se215_nutrifit/core/configs/constants/app_info.dart';
 
 import '../../../core/configs/theme/app_colors.dart';
+import 'target.dart';
 
 class PlanPage extends StatelessWidget {
   TextEditingController _nameController = TextEditingController(
@@ -200,7 +201,14 @@ class mucTieu extends StatelessWidget {
               activeColor: AppColors.xanh_ngoc_nhat,
             ),
             Sizedbutton(
-              onPressFun: () {},
+              onPressFun: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const Target(),
+                  ),
+                );
+              },
               text: 'Chi tiết',
               width: double.infinity,
             ),
