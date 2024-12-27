@@ -147,6 +147,19 @@ class _DetailFoodState extends State<DetailFood> {
                             'assets/images/album2.jpg',
                             fit: BoxFit.fitHeight,
                           ))),
+                  const SizedBox(width: 10),
+                  Container(
+                      width: 60,
+                      height: 60,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: ClipRRect(
+                          borderRadius: BorderRadius.circular(8.0),
+                          child: Image.asset(
+                            'assets/images/album5.jpg',
+                            fit: BoxFit.fitHeight,
+                          ))),
                 ],
               ),
               const SizedBox(height: 10),

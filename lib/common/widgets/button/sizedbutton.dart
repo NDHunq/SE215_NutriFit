@@ -53,7 +53,7 @@ class _SizedbuttonState extends State<Sizedbutton> {
         style: TextStyle(
           fontSize: 16,
           fontFamily: 'Inter',
-          fontWeight: FontWeight.normal,
+          fontWeight: FontWeight.w500,
           color: widget.textColor,
           // Text color
         ),

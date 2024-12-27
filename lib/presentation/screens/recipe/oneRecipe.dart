@@ -217,7 +217,14 @@ class foodCard extends StatelessWidget {
                     ))),
             trailing: IconButton(
               icon: const Icon(Icons.arrow_forward_ios_rounded),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const DetailFood(),
+                  ),
+                );
+              },
             ),
           ),
         ),
