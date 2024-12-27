@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:se215_nutrifit/presentation/screens/workout/exercise/preExercise.dart';
+import 'package:se215_nutrifit/presentation/screens/workout/exercise/setting.dart';
 import 'dart:async';
 import 'package:video_player/video_player.dart'; // Import thư viện video_player
 
@@ -79,17 +81,168 @@ class _RelaxScreenState extends State<RelaxScreen> {
     return '${minutes.toString().padLeft(2, '0')}:${remainingSeconds.toString().padLeft(2, '0')}';
   }
 
+  void showInfoForm() {
+    setState(() {
+      _timer?.cancel();
+    });
+    showModalBottomSheet(
+      context: context,
+      builder: (context) {
+        return Container(
+          padding: EdgeInsets.all(16.0),
+          width: double.infinity,
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Tiêu đề bài tập
+                  Text(
+                    'Leo núi',
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  ),
+
+                  // Các nút: 2D, Video, Cơ bắp
+
+                  // Thời lượng
+                  Row(
+                    children: [
+                      Text(
+                        'Thời lượng:',
+                        style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: AppColors.xanh_ngoc_dam),
+                      ),
+                      Spacer(),
+                      Text(
+                        '00:20',
+                        style: TextStyle(
+                            fontSize: 40,
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 5),
+                  // Giới thiệu
+                  Text(
+                    'Giới thiệu',
+                    style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: AppColors.xanh_ngoc_dam),
+                  ),
+                  SizedBox(height: 5),
+                  Text(
+                    'Bắt đầu ở tư thế chống đẩy. Co gối phải về phía ngực và giữ chân trái thẳng, sau đó nhanh chóng chuyển sang chân khác. Bài tập này tăng cường nhiều nhóm cơ.',
+                    style: TextStyle(fontSize: 16),
+                  ),
+                  SizedBox(height: 15),
+                  // Vùng tập trung
+                  Text(
+                    'Vùng tập trung',
+                    style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: AppColors.xanh_ngoc_dam),
+                  ),
+                  SizedBox(height: 8),
+                  Row(
+                    children: [
+                      Chip(
+                        label: Text('Bụng'),
+                        backgroundColor: AppColors.xam_nhat,
+                      ),
+                      SizedBox(width: 10),
+                      Chip(
+                        label: Text('Cơ mông'),
+                        backgroundColor: AppColors.xam_nhat,
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 20),
+                  // Ảnh minh họa
+                  Container(
+                    height: 200,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage('assets/images/leonui.jpg'),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    ).whenComplete(() {
+      setState(() {
+        _startTimer();
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.xanh_ngoc_nhat,
       appBar: AppBar(
+        actions: [
+          IconButton(
+            icon: Icon(
+              Icons.settings,
+              color: Colors.white,
+            ),
+            onPressed: () {
+              _timer?.cancel();
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => SettingScreen()),
+              ).then((_) {
+                _startTimer(); // Start timer again when returning from settings
+              });
+            },
+          ),
+        ],
         backgroundColor: AppColors.xanh_ngoc_nhat,
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () {
-            Navigator.pop(context);
+            _timer?.cancel();
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  content: const Text('Bạn có muốn dừng luyện tập không?'),
+                  actions: [
+                    TextButton(
+                      onPressed: () {
+                        Navigator.of(context).pop(); // Close the dialog
+                        _startTimer(); // Continue the timer
+                      },
+                      child: const Text('Không'),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.of(context).pop(); // Close the dialog
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => PreExerciseScreen()),
+                        );
+                      },
+                      child: const Text('Dừng'),
+                    ),
+                  ],
+                );
+              },
+            );
           },
         ),
       ),
@@ -114,13 +267,13 @@ class _RelaxScreenState extends State<RelaxScreen> {
                                     fontWeight: FontWeight.bold)),
                           ),
                           TextButton.icon(
-                            onPressed: () {},
+                            onPressed: showInfoForm,
                             icon: const Icon(
                               Icons.help_outline,
                               color: Colors.black,
                             ),
                             label: const Text(
-                              'Bước cao',
+                              'Leo núi',
                               style: TextStyle(
                                 color: Colors.black,
                                 fontSize: 18,

@@ -1,7 +1,5 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:se215_nutrifit/presentation/screens/navigation/navigation.dart';
-import 'package:se215_nutrifit/presentation/screens/workout/exercise/finish.dart';
 
 // Thêm dòng này
 

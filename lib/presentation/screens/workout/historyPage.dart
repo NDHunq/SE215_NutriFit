@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:se215_nutrifit/core/configs/theme/app_colors.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:flutter_chart/flutter_chart.dart';
 
 class HistoryPage extends StatefulWidget {
   @override
@@ -27,31 +28,32 @@ class _HistoryPageState extends State<HistoryPage>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Lịch sử"),
+        title: const Text("Lịch sử"),
         bottom: TabBar(
           controller: _tabController,
           tabs: [
-            Tab(text: "Lịch"),
-            Tab(text: "Thời lượng"),
-            Tab(text: "Calo"),
+            const Tab(text: "Lịch"),
+            const Tab(text: "Thời lượng"),
+            const Tab(text: "Calo"),
           ],
         ),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Expanded(
+          Container(
+            height: 380,
             child: TabBarView(
               controller: _tabController,
               children: [
                 HistoryTab(), // Tab "Lịch"
                 TimeTab(), // Tab "Thời lượng"
-                Placeholder(), // Tab "Calo"
+                CaloTab(), // Tab "Calo"
               ],
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(16.0),
+          const Padding(
+            padding: EdgeInsets.all(16.0),
             child: Text(
               "Lịch sử hàng tuần",
               style: TextStyle(
@@ -78,8 +80,8 @@ class _HistoryPageState extends State<HistoryPage>
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          "17 Th11 - 23 Th11",
+                        const Text(
+                          "22 Th12 - 28 Th12",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 16,
@@ -94,13 +96,13 @@ class _HistoryPageState extends State<HistoryPage>
                         ),
                       ],
                     ),
-                    SizedBox(height: 16),
+                    const SizedBox(height: 16),
                     // Phần danh sách chi tiết
-                    Column(
+                    const Column(
                       children: [
                         HistoryDetailItem(
                           icon: Icons.local_fire_department,
-                          title: "Luyện tập ngày 23/11",
+                          title: "Luyện tập ngày 23/12",
                           subtitle: "10 động tác - 10 phút - 500 calo",
                         ),
                         SizedBox(height: 8),
@@ -135,10 +137,10 @@ class _HistoryTabState extends State<HistoryTab> {
   void initState() {
     super.initState();
     _highlightedDays = [
-      DateTime.now().subtract(Duration(days: 2)),
-      DateTime.now().subtract(Duration(days: 1)),
+      DateTime.now().subtract(const Duration(days: 2)),
+      DateTime.now().subtract(const Duration(days: 1)),
       DateTime.now(),
-      DateTime.now().add(Duration(days: 1)),
+      DateTime.now().add(const Duration(days: 1)),
       DateTime(2024, 11, 23),
     ];
     _events = {
@@ -150,23 +152,28 @@ class _HistoryTabState extends State<HistoryTab> {
   @override
   Widget build(BuildContext context) {
     return TableCalendar(
-      calendarStyle: CalendarStyle(
+      calendarStyle: const CalendarStyle(
         todayDecoration: BoxDecoration(
-          color: Colors.blue,
+          color: Colors.black,
           shape: BoxShape.circle,
+          border: Border(),
         ),
         selectedDecoration: BoxDecoration(
-          color: Colors.green,
+          color: AppColors.xanh_ngoc_nhat, // Color for the selected date
           shape: BoxShape.circle,
         ),
         markersMaxCount: 1,
         markersAlignment: Alignment.bottomCenter,
         markersOffset: PositionedOffset(bottom: 5),
         markerDecoration: BoxDecoration(
-          color: Colors.green,
+          color: AppColors.xanh_ngoc_nhat,
           shape: BoxShape.rectangle,
         ),
       ),
+      selectedDayPredicate: (day) {
+        // Highlight 23rd November
+        return day.day == 23 && day.month == 12;
+      },
       eventLoader: (day) {
         return _events[day] ?? [];
       },
@@ -180,7 +187,67 @@ class _HistoryTabState extends State<HistoryTab> {
 class TimeTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Placeholder();
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: ChartBar(
+        size:
+            Size(MediaQuery.of(context).size.width, 300), // Kích thước biểu đồ
+        chartBeans: _chartData(), // Cung cấp dữ liệu cho biểu đồ
+        rectColor: Colors.teal, // Màu của cột
+        duration: const Duration(milliseconds: 800), // Thời gian animation
+        fontSize: 12, // Kích thước chữ
+        fontColor: Colors.black, // Màu chữ
+        isShowX: true, // Hiển thị trục X
+        isShowTouchValue: true, // Hiển thị giá trị khi chạm vào
+      ),
+    );
+  }
+
+  // Cung cấp dữ liệu cho biểu đồ
+  List<ChartBean> _chartData() {
+    return [
+      ChartBean(x: '22/12', y: 0),
+      ChartBean(x: '23/12', y: 200),
+      ChartBean(x: '24/12', y: 0),
+      ChartBean(x: '25/12', y: 0),
+      ChartBean(x: '26/12', y: 0),
+      ChartBean(x: '27/12', y: 0),
+      ChartBean(x: '28/12', y: 0),
+    ];
+  }
+}
+
+class CaloTab extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: ChartBar(
+        size:
+            Size(MediaQuery.of(context).size.width, 300), // Kích thước biểu đồ
+        chartBeans: _chartData(), // Cung cấp dữ liệu cho biểu đồ
+        rectColor: Colors.teal, // Màu của cột
+        duration: const Duration(milliseconds: 800), // Thời gian animation
+        fontSize: 12, // Kích thước chữ
+        fontColor: Colors.black, // Màu chữ
+        isShowX: true, // Hiển thị trục X
+        isShowTouchValue: true, // Hiển thị giá trị khi chạm vào
+        // Hiển thị giá trị trên mỗi cột
+      ),
+    );
+  }
+
+  // Cung cấp dữ liệu cho biểu đồ
+  List<ChartBean> _chartData() {
+    return [
+      ChartBean(x: '22/12', y: 0),
+      ChartBean(x: '23/12', y: 200),
+      ChartBean(x: '24/12', y: 0),
+      ChartBean(x: '25/12', y: 0),
+      ChartBean(x: '26/12', y: 0),
+      ChartBean(x: '27/12', y: 0),
+      ChartBean(x: '28/12', y: 0),
+    ];
   }
 }
 
@@ -202,7 +269,7 @@ class HistoryItem extends StatelessWidget {
         leading: Icon(icon, color: Colors.blue),
         title: Text(title),
         subtitle: Text(subtitle),
-        trailing: Icon(Icons.arrow_forward_ios, size: 16),
+        trailing: const Icon(Icons.arrow_forward_ios, size: 16),
         onTap: () {
           // Xử lý khi nhấn vào item
         },
@@ -228,14 +295,14 @@ class HistoryDetailItem extends StatelessWidget {
       children: [
         // Biểu tượng bên trái
         Container(
-          padding: EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(8.0),
           decoration: BoxDecoration(
             color: Colors.teal[100], // Màu nền icon
             shape: BoxShape.circle,
           ),
           child: Icon(icon, color: Colors.teal),
         ),
-        SizedBox(width: 16),
+        const SizedBox(width: 16),
         // Nội dung bên phải
         Expanded(
           child: Column(
@@ -243,7 +310,7 @@ class HistoryDetailItem extends StatelessWidget {
             children: [
               Text(
                 title,
-                style: TextStyle(
+                style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 16,
                 ),
@@ -258,7 +325,8 @@ class HistoryDetailItem extends StatelessWidget {
             ],
           ),
         ),
-        Icon(Icons.arrow_forward_ios, size: 16, color: Colors.teal), // Mũi tên
+        const Icon(Icons.arrow_forward_ios,
+            size: 16, color: Colors.teal), // Mũi tên
       ],
     );
   }

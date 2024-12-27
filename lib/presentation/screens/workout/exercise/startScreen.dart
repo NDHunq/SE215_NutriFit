@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:se215_nutrifit/core/configs/theme/app_colors.dart';
+import 'package:se215_nutrifit/presentation/screens/workout/exercise/preExercise.dart';
+import 'package:se215_nutrifit/presentation/screens/workout/exercise/setting.dart';
 import 'package:video_player/video_player.dart'; // Import video_player
 import 'dart:async';
 
@@ -49,31 +51,101 @@ class _StartScreenState extends State<StartScreen> {
       builder: (context) {
         return Container(
           padding: EdgeInsets.all(16.0),
-          height: 300,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Thông tin bài tập',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          width: double.infinity,
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Tiêu đề bài tập
+                  Text(
+                    'Leo núi',
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  ),
+
+                  // Các nút: 2D, Video, Cơ bắp
+
+                  // Thời lượng
+                  Row(
+                    children: [
+                      Text(
+                        'Thời lượng:',
+                        style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: AppColors.xanh_ngoc_dam),
+                      ),
+                      Spacer(),
+                      Text(
+                        '00:20',
+                        style: TextStyle(
+                            fontSize: 40,
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 5),
+                  // Giới thiệu
+                  Text(
+                    'Giới thiệu',
+                    style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: AppColors.xanh_ngoc_dam),
+                  ),
+                  SizedBox(height: 5),
+                  Text(
+                    'Bắt đầu ở tư thế chống đẩy. Co gối phải về phía ngực và giữ chân trái thẳng, sau đó nhanh chóng chuyển sang chân khác. Bài tập này tăng cường nhiều nhóm cơ.',
+                    style: TextStyle(fontSize: 16),
+                  ),
+                  SizedBox(height: 15),
+                  // Vùng tập trung
+                  Text(
+                    'Vùng tập trung',
+                    style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: AppColors.xanh_ngoc_dam),
+                  ),
+                  SizedBox(height: 8),
+                  Row(
+                    children: [
+                      Chip(
+                        label: Text('Bụng'),
+                        backgroundColor: AppColors.xam_nhat,
+                      ),
+                      SizedBox(width: 10),
+                      Chip(
+                        label: Text('Cơ mông'),
+                        backgroundColor: AppColors.xam_nhat,
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 20),
+                  // Ảnh minh họa
+                  Container(
+                    height: 200,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage('assets/images/leonui.jpg'),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                ],
               ),
-              SizedBox(height: 16),
-              Text('Bài tập này giúp tăng cường nhóm cơ bụng và cơ mông.'),
-              SizedBox(height: 16),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                  setState(() {
-                    isPaused = false;
-                  });
-                },
-                child: Text('Đóng'),
-              ),
-            ],
+            ),
           ),
         );
       },
-    );
+    ).whenComplete(() {
+      setState(() {
+        isPaused = false;
+      });
+    });
   }
 
   @override
@@ -106,7 +178,15 @@ class _StartScreenState extends State<StartScreen> {
         actions: [
           IconButton(
             icon: Icon(Icons.settings),
-            onPressed: () {},
+            onPressed: () {
+              timer?.cancel();
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => SettingScreen()),
+              ).then((_) {
+                startTimer(); // Start timer again when returning from settings
+              });
+            },
           ),
         ],
       ),
@@ -167,9 +247,11 @@ class _StartScreenState extends State<StartScreen> {
                   ),
                   SizedBox(height: 20),
                   TextButton.icon(
-                    onPressed: showInfoForm,
+                    onPressed: () {
+                      showInfoForm();
+                    },
                     icon: Icon(Icons.help_outline),
-                    label: Text('Bước cao'),
+                    label: Text('Leo núi'),
                   ),
                 ],
               ),

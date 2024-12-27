@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:se215_nutrifit/core/configs/theme/app_colors.dart';
 import 'package:se215_nutrifit/presentation/screens/workout/exercise/finish.dart';
+import 'package:se215_nutrifit/presentation/screens/workout/exercise/preExercise.dart';
+import 'package:se215_nutrifit/presentation/screens/workout/exercise/setting.dart';
 import 'package:video_player/video_player.dart'; // Import video_player
 import 'dart:async';
 
@@ -34,6 +36,112 @@ class _ExerciseProgressScreenState extends State<ExerciseProgressScreen> {
       });
 
     _startTimer();
+  }
+
+  void showInfoForm() {
+    setState(() {
+      _timer?.cancel();
+    });
+    showModalBottomSheet(
+      context: context,
+      builder: (context) {
+        return Container(
+          padding: EdgeInsets.all(16.0),
+          width: double.infinity,
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Tiêu đề bài tập
+                  Text(
+                    'Leo núi',
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  ),
+
+                  // Các nút: 2D, Video, Cơ bắp
+
+                  // Thời lượng
+                  Row(
+                    children: [
+                      Text(
+                        'Thời lượng:',
+                        style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: AppColors.xanh_ngoc_dam),
+                      ),
+                      Spacer(),
+                      Text(
+                        '00:20',
+                        style: TextStyle(
+                            fontSize: 40,
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 5),
+                  // Giới thiệu
+                  Text(
+                    'Giới thiệu',
+                    style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: AppColors.xanh_ngoc_dam),
+                  ),
+                  SizedBox(height: 5),
+                  Text(
+                    'Bắt đầu ở tư thế chống đẩy. Co gối phải về phía ngực và giữ chân trái thẳng, sau đó nhanh chóng chuyển sang chân khác. Bài tập này tăng cường nhiều nhóm cơ.',
+                    style: TextStyle(fontSize: 16),
+                  ),
+                  SizedBox(height: 15),
+                  // Vùng tập trung
+                  Text(
+                    'Vùng tập trung',
+                    style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: AppColors.xanh_ngoc_dam),
+                  ),
+                  SizedBox(height: 8),
+                  Row(
+                    children: [
+                      Chip(
+                        label: Text('Bụng'),
+                        backgroundColor: AppColors.xam_nhat,
+                      ),
+                      SizedBox(width: 10),
+                      Chip(
+                        label: Text('Cơ mông'),
+                        backgroundColor: AppColors.xam_nhat,
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 20),
+                  // Ảnh minh họa
+                  Container(
+                    height: 200,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage('assets/images/leonui.jpg'),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    ).whenComplete(() {
+      setState(() {
+        _startTimer();
+      });
+    });
   }
 
   void _startTimer() {
@@ -79,12 +187,50 @@ class _ExerciseProgressScreenState extends State<ExerciseProgressScreen> {
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.black),
-          onPressed: () {},
+          onPressed: () {
+            _timer?.cancel();
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  content: const Text('Bạn có muốn dừng luyện tập không?'),
+                  actions: [
+                    TextButton(
+                      onPressed: () {
+                        Navigator.of(context).pop(); // Close the dialog
+                        _startTimer(); // Continue the timer
+                      },
+                      child: const Text('Không'),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.of(context).pop(); // Close the dialog
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => PreExerciseScreen()),
+                        );
+                      },
+                      child: const Text('Dừng'),
+                    ),
+                  ],
+                );
+              },
+            );
+          },
         ),
         actions: [
           IconButton(
             icon: const Icon(Icons.settings, color: Colors.black),
-            onPressed: () {},
+            onPressed: () {
+              _timer?.cancel();
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => SettingScreen()),
+              ).then((_) {
+                _startTimer(); // Start timer again when returning from settings
+              });
+            },
           ),
         ],
       ),
@@ -127,9 +273,14 @@ class _ExerciseProgressScreenState extends State<ExerciseProgressScreen> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15),
             child: TextButton.icon(
-              onPressed: () {},
+              onPressed: showInfoForm,
               icon: const Icon(Icons.help_outline),
-              label: const Text('Bước cao'),
+              label: const Text(
+                'Leo núi',
+                style: TextStyle(
+                  fontSize: 18,
+                ),
+              ),
             ),
           ),
           const SizedBox(height: 20),
