@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:se215_nutrifit/core/configs/theme/app_colors.dart';
+import 'package:se215_nutrifit/presentation/screens/plan/planPage.dart';
 import 'package:se215_nutrifit/presentation/screens/workout/exercise/preExercise.dart';
 import 'package:se215_nutrifit/presentation/screens/workout/historyPage.dart';
 
@@ -87,15 +88,17 @@ class WorkoutPage extends StatelessWidget {
                         ),
                       ],
                     ),
-                    ElevatedButton(
-                      onPressed: () {},
-                      child: const Text('Xây dựng',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold)),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.xanh_ngoc_nhat,
+                    IconButton(
+                      icon: const Icon(
+                        Icons.chevron_right_outlined,
+                        color: AppColors.xanh_ngoc_nhat,
                       ),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => PlanPage()),
+                        );
+                      },
                     ),
                   ],
                 ),

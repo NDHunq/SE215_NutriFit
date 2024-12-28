@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:se215_nutrifit/core/configs/theme/app_colors.dart';
+import 'package:se215_nutrifit/presentation/screens/navigation/navigation.dart';
+import 'package:se215_nutrifit/presentation/screens/workout/exercise/setting.dart';
 import 'package:se215_nutrifit/presentation/screens/workout/exercise/startScreen.dart';
 import 'package:se215_nutrifit/presentation/screens/workout/workoutPage.dart';
 
@@ -15,7 +17,10 @@ class _PreExerciseScreenState extends State<PreExerciseScreen> {
       onWillPop: () async {
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => WorkoutPage()),
+          MaterialPageRoute(
+              builder: (context) => Navigation(
+                    tab: 1,
+                  )),
         );
         return false;
       },
@@ -128,7 +133,13 @@ class _PreExerciseScreenState extends State<PreExerciseScreen> {
                       Icons.arrow_forward_ios,
                       size: 20,
                     ),
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => SettingScreen()),
+                      );
+                    },
                   ),
                 ),
               ),
