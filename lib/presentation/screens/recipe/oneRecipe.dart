@@ -43,23 +43,32 @@ class _OneRecipeState extends State<OneRecipe> {
                   color: AppColors.xanh_ngoc_dam,
                 ),
               ),
-              leading: Icon(
-                Icons.account_circle_sharp,
-                size: 40,
-              ),
+              leading: Image(image: AssetImage('assets/images/6858504.png')),
             ),
             const SizedBox(height: 10),
-            const foodCard(),
-            const foodCard(),
-            const foodCard(),
+            foodCard(
+                name: 'Cơm gạo lứt',
+                kcal: '200 kcal',
+                image: 'assets/images/album1.jpg'),
+            foodCard(
+                name: 'Salad cá hồi',
+                kcal: '60 kcal',
+                image: 'assets/images/album2.jpg'),
+            foodCard(
+                name: 'Bún riêu',
+                kcal: '230 kcal',
+                image: 'assets/images/album3.jpg'),
+            foodCard(
+                name: 'Sữa chua hạt đác',
+                kcal: '100 kcal',
+                image: 'assets/images/album4.jpg'),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
               child: Container(
                 decoration: BoxDecoration(
-                  border: Border.all(
-                    color: AppColors.xam_thuong,
-                    width: 1,
-                  ),
+                  color: Colors.white,
+                  border:
+                      Border.all(color: const Color(0xFFE0E0E0), width: 1.0),
                   borderRadius: BorderRadius.circular(7),
                 ),
                 child: Padding(
@@ -77,7 +86,10 @@ class _OneRecipeState extends State<OneRecipe> {
                         children: [
                           const Padding(
                             padding: EdgeInsets.only(right: 8.0),
-                            child: Icon(Icons.account_circle_sharp, size: 40),
+                            child: Image(
+                                image: AssetImage('assets/images/6858504.png'),
+                                width: 40,
+                                height: 40),
                           ),
                           Expanded(
                             child: TextField(
@@ -85,7 +97,11 @@ class _OneRecipeState extends State<OneRecipe> {
                                 border: const OutlineInputBorder(),
                                 labelText: 'Nhập bình luận',
                                 suffixIcon: IconButton(
-                                  icon: const Icon(Icons.send),
+                                  icon: const Icon(
+                                    Icons.send,
+                                    size: 23,
+                                    color: AppColors.xanh_ngoc_nhat,
+                                  ),
                                   onPressed: () {
                                     // Add your send button logic here
                                   },
@@ -97,8 +113,28 @@ class _OneRecipeState extends State<OneRecipe> {
                       ),
                       const Divider(),
                       const cmt(),
+                      const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 60.0),
+                        child: Text("5 phút",
+                            style: TextStyle(
+                                fontSize: 13, color: AppColors.xam_thuong)),
+                      ),
+                      const SizedBox(height: 5),
                       const cmt(),
+                      const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 60.0),
+                        child: Text("6 phút",
+                            style: TextStyle(
+                                fontSize: 13, color: AppColors.xam_thuong)),
+                      ),
+                      const SizedBox(height: 5),
                       const cmt(),
+                      const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 60.0),
+                        child: Text("15 phút",
+                            style: TextStyle(
+                                fontSize: 13, color: AppColors.xam_thuong)),
+                      ),
                       const Divider(),
                       TextButton(
                           onPressed: () {},
@@ -132,7 +168,10 @@ class cmt extends StatelessWidget {
         children: [
           const Align(
               alignment: Alignment.topCenter,
-              child: Icon(Icons.account_circle_sharp, size: 40)),
+              child: Image(
+                  image: AssetImage('assets/images/6858504.png'),
+                  width: 40,
+                  height: 40)),
           const SizedBox(width: 10),
           Expanded(
             child: Container(
@@ -172,7 +211,13 @@ class cmt extends StatelessWidget {
 }
 
 class foodCard extends StatelessWidget {
-  const foodCard({
+  String name;
+  String kcal;
+  String image;
+  foodCard({
+    required this.name,
+    required this.kcal,
+    required this.image,
     super.key,
   });
 
@@ -191,17 +236,17 @@ class foodCard extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 10.0),
         child: Card(
           child: ListTile(
-            title: const Text(
-              'Bánh mì',
-              style: TextStyle(
+            title: Text(
+              name,
+              style: const TextStyle(
                 fontSize: 15,
                 fontWeight: FontWeight.bold,
                 color: AppColors.xanh_ngoc_dam,
               ),
             ),
-            subtitle: const Text(
-              '200 kcal',
-              style: TextStyle(
+            subtitle: Text(
+              kcal,
+              style: const TextStyle(
                 fontSize: 14,
                 color: AppColors.xam_thuong,
               ),
@@ -210,9 +255,9 @@ class foodCard extends StatelessWidget {
                 width: 70,
                 height: 70,
                 child: ClipRRect(
-                    borderRadius: BorderRadius.circular(8.0),
+                    borderRadius: BorderRadius.circular(10.0),
                     child: Image.asset(
-                      'assets/images/album2.jpg',
+                      image,
                       fit: BoxFit.fitHeight,
                     ))),
             trailing: IconButton(

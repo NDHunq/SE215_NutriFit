@@ -12,6 +12,23 @@ class Target extends StatefulWidget {
 }
 
 class _TargetState extends State<Target> {
+  String _selectedTime = "Nhanh"; // Add this line
+  String _selectedTarget = "Đạt được"; // Add this line
+
+  void _onTimeChanged(String? value) {
+    // Add this line
+    setState(() {
+      _selectedTime = value!;
+    });
+  }
+
+  void _onTargetChanged(String? value) {
+    // Add this line
+    setState(() {
+      _selectedTarget = value!;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,7 +45,12 @@ class _TargetState extends State<Target> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 10),
-            luyenTap(),
+            luyenTap(
+              selectedTime: _selectedTime, // Add this line
+              onTimeChanged: _onTimeChanged, // Add this line
+              selectedTarget: _selectedTarget, // Add this line
+              onTargetChanged: _onTargetChanged, // Add this line
+            ),
             const SizedBox(height: 10),
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: AppInfo.main_padding),
@@ -49,8 +71,17 @@ class _TargetState extends State<Target> {
 }
 
 class luyenTap extends StatelessWidget {
+  final String selectedTime; // Add this line
+  final ValueChanged<String?> onTimeChanged; // Add this line
+  final String selectedTarget; // Add this line
+  final ValueChanged<String?> onTargetChanged; // Add this line
+
   const luyenTap({
     super.key,
+    required this.selectedTime, // Add this line
+    required this.onTimeChanged, // Add this line
+    required this.selectedTarget, // Add this line
+    required this.onTargetChanged, // Add this line
   });
 
   @override
@@ -72,8 +103,8 @@ class luyenTap extends StatelessWidget {
               RadioListTile(
                 title: const Text('Đạt được'),
                 value: 'Đạt được',
-                groupValue: 'target',
-                onChanged: (value) {},
+                groupValue: selectedTarget, // Update this line
+                onChanged: onTargetChanged, // Update this line
               ),
               const SizedBox(height: 10),
               Padding(
@@ -97,7 +128,7 @@ class luyenTap extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 5),
-              const Padding(
+              Padding(
                 padding: EdgeInsets.symmetric(horizontal: AppInfo.main_padding),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -106,9 +137,29 @@ class luyenTap extends StatelessWidget {
                       "Thời gian hoàn thành",
                       style: TextStyle(color: AppColors.xam_thuong),
                     ),
-                    Text(
-                      "Nhanh   >",
-                      style: TextStyle(color: AppColors.xam_thuong),
+                    DropdownButton<String>(
+                      items: const [
+                        DropdownMenuItem(
+                            value: "Nhanh",
+                            child: Text("Nhanh",
+                                style: TextStyle(
+                                    fontSize: 14,
+                                    color: AppColors.xam_thuong))),
+                        DropdownMenuItem(
+                            value: "Trung bình",
+                            child: Text("Trung bình",
+                                style: TextStyle(
+                                    fontSize: 14,
+                                    color: AppColors.xam_thuong))),
+                        DropdownMenuItem(
+                            value: "Nhẹ",
+                            child: Text("Nhẹ",
+                                style: TextStyle(
+                                    fontSize: 14,
+                                    color: AppColors.xam_thuong))),
+                      ],
+                      onChanged: onTimeChanged,
+                      value: selectedTime,
                     )
                   ],
                 ),
@@ -116,26 +167,26 @@ class luyenTap extends StatelessWidget {
               RadioListTile(
                 title: const Text('Giảm tỉ lệ mỡ'),
                 value: 'Giảm tỉ lệ mỡ',
-                groupValue: 'target',
-                onChanged: (value) {},
+                groupValue: selectedTarget, // Update this line
+                onChanged: onTargetChanged, // Update this line
               ),
               RadioListTile(
                 title: const Text('Tăng sức bền'),
                 value: 'Tăng sức bền',
-                groupValue: 'target',
-                onChanged: (value) {},
+                groupValue: selectedTarget, // Update this line
+                onChanged: onTargetChanged, // Update this line
               ),
               RadioListTile(
                 title: const Text('Tăng cường cơ bắp'),
                 value: 'Tăng cường cơ bắp',
-                groupValue: 'target',
-                onChanged: (value) {},
+                groupValue: selectedTarget, // Update this line
+                onChanged: onTargetChanged, // Update this line
               ),
               RadioListTile(
                 title: const Text('Sống lành mạnh'),
                 value: 'Sống lành mạnh',
-                groupValue: 'target',
-                onChanged: (value) {},
+                groupValue: selectedTarget, // Update this line
+                onChanged: onTargetChanged, // Update this line
               ),
             ],
           ),

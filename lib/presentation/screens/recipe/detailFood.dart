@@ -11,6 +11,28 @@ class DetailFood extends StatefulWidget {
 }
 
 class _DetailFoodState extends State<DetailFood> {
+  void _showImageModal(String imagePath) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Dialog(
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(8.0),
+              child: Image.asset(
+                imagePath,
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,7 +77,7 @@ class _DetailFoodState extends State<DetailFood> {
                   child: ClipRRect(
                       borderRadius: BorderRadius.circular(8.0),
                       child: Image.asset(
-                        'assets/images/album1.jpg',
+                        'assets/images/album2.jpg',
                         fit: BoxFit.fitHeight,
                       ))),
               const SizedBox(height: 10),
@@ -122,7 +144,9 @@ class _DetailFoodState extends State<DetailFood> {
               const SizedBox(height: 8),
               Row(
                 children: [
-                  Container(
+                  GestureDetector(
+                    onTap: () => _showImageModal('assets/images/album1.jpg'),
+                    child: Container(
                       width: 60,
                       height: 60,
                       decoration: BoxDecoration(
@@ -133,9 +157,13 @@ class _DetailFoodState extends State<DetailFood> {
                           child: Image.asset(
                             'assets/images/album1.jpg',
                             fit: BoxFit.fitHeight,
-                          ))),
+                          )),
+                    ),
+                  ),
                   const SizedBox(width: 10),
-                  Container(
+                  GestureDetector(
+                    onTap: () => _showImageModal('assets/images/album2.jpg'),
+                    child: Container(
                       width: 60,
                       height: 60,
                       decoration: BoxDecoration(
@@ -146,9 +174,13 @@ class _DetailFoodState extends State<DetailFood> {
                           child: Image.asset(
                             'assets/images/album2.jpg',
                             fit: BoxFit.fitHeight,
-                          ))),
+                          )),
+                    ),
+                  ),
                   const SizedBox(width: 10),
-                  Container(
+                  GestureDetector(
+                    onTap: () => _showImageModal('assets/images/album5.jpg'),
+                    child: Container(
                       width: 60,
                       height: 60,
                       decoration: BoxDecoration(
@@ -159,7 +191,9 @@ class _DetailFoodState extends State<DetailFood> {
                           child: Image.asset(
                             'assets/images/album5.jpg',
                             fit: BoxFit.fitHeight,
-                          ))),
+                          )),
+                    ),
+                  ),
                 ],
               ),
               const SizedBox(height: 10),
@@ -188,7 +222,9 @@ class _DetailFoodState extends State<DetailFood> {
               const SizedBox(height: 8),
               Row(
                 children: [
-                  Container(
+                  GestureDetector(
+                    onTap: () => _showImageModal('assets/images/album3.jpg'),
+                    child: Container(
                       width: 60,
                       height: 60,
                       decoration: BoxDecoration(
@@ -199,9 +235,13 @@ class _DetailFoodState extends State<DetailFood> {
                           child: Image.asset(
                             'assets/images/album3.jpg',
                             fit: BoxFit.fitHeight,
-                          ))),
+                          )),
+                    ),
+                  ),
                   const SizedBox(width: 10),
-                  Container(
+                  GestureDetector(
+                    onTap: () => _showImageModal('assets/images/album4.jpg'),
+                    child: Container(
                       width: 60,
                       height: 60,
                       decoration: BoxDecoration(
@@ -212,7 +252,9 @@ class _DetailFoodState extends State<DetailFood> {
                           child: Image.asset(
                             'assets/images/album4.jpg',
                             fit: BoxFit.fitHeight,
-                          ))),
+                          )),
+                    ),
+                  ),
                 ],
               ),
               const SizedBox(height: 10),
@@ -246,7 +288,9 @@ class _DetailFoodState extends State<DetailFood> {
               const SizedBox(height: 8),
               Row(
                 children: [
-                  Container(
+                  GestureDetector(
+                    onTap: () => _showImageModal('assets/images/album4.jpg'),
+                    child: Container(
                       width: 60,
                       height: 60,
                       decoration: BoxDecoration(
@@ -257,9 +301,13 @@ class _DetailFoodState extends State<DetailFood> {
                           child: Image.asset(
                             'assets/images/album4.jpg',
                             fit: BoxFit.fitHeight,
-                          ))),
+                          )),
+                    ),
+                  ),
                   const SizedBox(width: 10),
-                  Container(
+                  GestureDetector(
+                    onTap: () => _showImageModal('assets/images/album5.jpg'),
+                    child: Container(
                       width: 60,
                       height: 60,
                       decoration: BoxDecoration(
@@ -270,7 +318,9 @@ class _DetailFoodState extends State<DetailFood> {
                           child: Image.asset(
                             'assets/images/album5.jpg',
                             fit: BoxFit.fitHeight,
-                          ))),
+                          )),
+                    ),
+                  ),
                 ],
               ),
               SizedBox(height: 20),

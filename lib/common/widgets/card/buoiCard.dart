@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:se215_nutrifit/common/widgets/button/sizedbutton.dart';
 import 'package:se215_nutrifit/data/models/buoi.dart';
+import 'package:se215_nutrifit/presentation/screens/recipe/detailFood.dart';
 
 import '../../../core/configs/theme/app_colors.dart';
 import '../../../presentation/screens/recipe/oneRecipe.dart';
@@ -22,6 +23,12 @@ class Buoi extends StatefulWidget {
 class BuoiState extends State<Buoi> {
   bool isExpanded = false;
   bool isFavorite = false;
+  List<String> food = [
+    "Cơm gạo lức",
+    "Salad cá hồi",
+    "Bún riêu",
+    "Sữa chua hạt đác"
+  ];
   @override
   Widget build(BuildContext context) {
     String buoii = "";
@@ -46,7 +53,7 @@ class BuoiState extends State<Buoi> {
               padding: const EdgeInsets.only(bottom: 10),
               child: Container(
                 decoration: BoxDecoration(
-                  color: AppColors.xam_nhat,
+                  color: Color(0xffE9F6F6),
                   borderRadius: BorderRadius.circular(7),
                 ),
                 child: Padding(
@@ -58,7 +65,7 @@ class BuoiState extends State<Buoi> {
                         children: [
                           Container(
                             decoration: BoxDecoration(
-                              color: AppColors.xam_nhat,
+                              color: Color(0xffE9F6F6),
                               borderRadius: BorderRadius.circular(7),
                             ),
                             child: Padding(
@@ -144,21 +151,60 @@ class BuoiState extends State<Buoi> {
                             child: CarouselSlider(
                               options: CarouselOptions(
                                   height: 150.0, autoPlay: true),
-                              items: [1, 2, 3, 4, 5].map((index) {
+                              items: [1, 2, 3, 4].map((index) {
                                 final String img =
                                     'assets/images/album$index.jpg';
                                 return Builder(
                                   builder: (BuildContext context) {
-                                    return Container(
-                                      width: MediaQuery.of(context).size.width,
-                                      margin: const EdgeInsets.symmetric(
-                                          horizontal: 5.0),
-                                      decoration: BoxDecoration(
-                                          image: DecorationImage(
-                                              image: AssetImage(img),
-                                              fit: BoxFit.cover),
-                                          borderRadius: const BorderRadius.all(
-                                              Radius.circular(20))),
+                                    return GestureDetector(
+                                      onTap: () => Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              const DetailFood(),
+                                        ),
+                                      ),
+                                      child: Stack(
+                                        children: [
+                                          Container(
+                                            width: MediaQuery.of(context)
+                                                .size
+                                                .width,
+                                            margin: const EdgeInsets.symmetric(
+                                                horizontal: 5.0),
+                                            decoration: BoxDecoration(
+                                                image: DecorationImage(
+                                                    image: AssetImage(img),
+                                                    fit: BoxFit.cover),
+                                                borderRadius:
+                                                    const BorderRadius.all(
+                                                        Radius.circular(20))),
+                                          ),
+                                          Positioned(
+                                            bottom: 15,
+                                            right: 20,
+                                            child: Container(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      horizontal: 10,
+                                                      vertical: 5),
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    const BorderRadius.all(
+                                                        Radius.circular(20)),
+                                                color: Colors.black
+                                                    .withOpacity(0.55),
+                                              ),
+                                              child: Text(
+                                                food[index - 1],
+                                                style: const TextStyle(
+                                                    fontSize: 15,
+                                                    color: Colors.white),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                     );
                                   },
                                 );
@@ -192,7 +238,7 @@ class BuoiState extends State<Buoi> {
               child: Container(
                 decoration: BoxDecoration(
                   color: widget.isHaveBackgroundColor
-                      ? AppColors.xam_nhat
+                      ? Color(0xffE9F6F6)
                       : Colors.transparent,
                   borderRadius: BorderRadius.circular(7),
                 ),

@@ -19,7 +19,7 @@ class Sizedbutton extends StatefulWidget {
     this.isEnabled = true,
     this.text = 'Nội dung', // Default text
     this.width = 130.0, // Default width
-    this.height = 50.0, // Default height
+    this.height = 45.0, // Default height
     this.backgroundColor = AppColors.xanh_ngoc_nhat, // Default color
     this.textColor = Colors.white, // Default textColor
     this.isStroke = false, // Default isStroke
@@ -51,7 +51,7 @@ class _SizedbuttonState extends State<Sizedbutton> {
       child: Text(
         widget.text,
         style: TextStyle(
-          fontSize: 16,
+          fontSize: 15,
           fontFamily: 'Inter',
           fontWeight: FontWeight.w500,
           color: widget.textColor,
