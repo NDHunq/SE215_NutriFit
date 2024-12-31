@@ -230,7 +230,8 @@ class _RelaxScreenState extends State<RelaxScreen> {
                     ),
                     TextButton(
                       onPressed: () {
-                        Navigator.of(context).pop(); // Close the dialog
+                        Navigator.of(context).pop();
+                        _timer?.cancel(); // Close the dialog
                         Navigator.push(
                           context,
                           MaterialPageRoute(

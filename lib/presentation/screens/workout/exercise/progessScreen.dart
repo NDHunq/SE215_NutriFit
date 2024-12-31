@@ -204,7 +204,9 @@ class _ExerciseProgressScreenState extends State<ExerciseProgressScreen> {
                     ),
                     TextButton(
                       onPressed: () {
-                        Navigator.of(context).pop(); // Close the dialog
+                        Navigator.of(context).pop();
+                        _timer?.cancel();
+                        // Close the dialog
                         Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -301,6 +303,7 @@ class _ExerciseProgressScreenState extends State<ExerciseProgressScreen> {
                   onPressed: widget.step == 1
                       ? null
                       : () {
+                          _timer?.cancel();
                           Navigator.push(
                             context,
                             MaterialPageRoute(

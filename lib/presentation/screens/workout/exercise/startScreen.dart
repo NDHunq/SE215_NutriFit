@@ -32,6 +32,7 @@ class _StartScreenState extends State<StartScreen> {
   }
 
   void navigateToNextScreen() {
+    timer?.cancel();
     Navigator.push(
       context,
       MaterialPageRoute(
@@ -39,7 +40,6 @@ class _StartScreenState extends State<StartScreen> {
                 step: 1,
               )),
     );
-    timer?.cancel();
   }
 
   void showInfoForm() {

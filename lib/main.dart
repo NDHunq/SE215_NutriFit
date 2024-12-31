@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:se215_nutrifit/presentation/screens/navigation/navigation.dart';
 import 'presentation/screens/auth/signin-page.dart';
 
 // Thêm dòng này
@@ -29,7 +30,7 @@ class _MyAppState extends State<MyApp> {
         useMaterial3: true,
       ),
 
-      home: const SignInPage(),
+      home: const Navigation(),
       debugShowCheckedModeBanner: false, // Bỏ nhãn DEBUG
     );
   }

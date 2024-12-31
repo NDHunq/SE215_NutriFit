@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:se215_nutrifit/core/configs/theme/app_colors.dart';
+import 'package:se215_nutrifit/presentation/screens/navigation/navigation.dart';
 import 'package:se215_nutrifit/presentation/screens/workout/workoutPage.dart';
 
 class FinishScreen extends StatelessWidget {
@@ -77,8 +78,12 @@ class FinishScreen extends StatelessWidget {
                 const Spacer(),
                 ElevatedButton(
                   onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => WorkoutPage()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => Navigation(
+                                  tab: 1,
+                                )));
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.xanh_ngoc_nhat,
