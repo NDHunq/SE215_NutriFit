@@ -179,7 +179,7 @@ class _DetailFoodState extends State<DetailFood> {
                   ),
                   const SizedBox(width: 10),
                   GestureDetector(
-                    onTap: () => _showImageModal('assets/images/album5.jpg'),
+                    onTap: () => _showImageModal('assets/images/album2.jpg'),
                     child: Container(
                       width: 60,
                       height: 60,
@@ -189,7 +189,7 @@ class _DetailFoodState extends State<DetailFood> {
                       child: ClipRRect(
                           borderRadius: BorderRadius.circular(8.0),
                           child: Image.asset(
-                            'assets/images/album5.jpg',
+                            'assets/images/album2.jpg',
                             fit: BoxFit.fitHeight,
                           )),
                     ),
@@ -306,7 +306,7 @@ class _DetailFoodState extends State<DetailFood> {
                   ),
                   const SizedBox(width: 10),
                   GestureDetector(
-                    onTap: () => _showImageModal('assets/images/album5.jpg'),
+                    onTap: () => _showImageModal('assets/images/album2.jpg'),
                     child: Container(
                       width: 60,
                       height: 60,
@@ -316,7 +316,7 @@ class _DetailFoodState extends State<DetailFood> {
                       child: ClipRRect(
                           borderRadius: BorderRadius.circular(8.0),
                           child: Image.asset(
-                            'assets/images/album5.jpg',
+                            'assets/images/album2.jpg',
                             fit: BoxFit.fitHeight,
                           )),
                     ),

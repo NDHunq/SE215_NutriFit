@@ -8,168 +8,170 @@ import 'package:se215_nutrifit/presentation/screens/workout/historyPage.dart';
 class WorkoutPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // Streak Section
-              Container(
-                width: double.infinity,
-                padding: const EdgeInsets.all(10.0),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(16.0),
-                  border:
-                      Border.all(color: const Color(0xFFE0E0E0), width: 1.0),
-                ),
-                child: Row(
-                  children: [
-                    const Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          '3 ngày liên tục',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16,
-                              color: AppColors.xanh_ngoc_dam),
-                        ),
-                        Text('Tuần này bạn đã luyện tập 7 lần',
-                            style: TextStyle(color: Colors.grey)),
-                      ],
-                    ),
-                    const Spacer(),
-                    IconButton(
-                      icon: const Icon(
-                        Icons.chevron_right_outlined,
-                        color: AppColors.xanh_ngoc_nhat,
-                      ),
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => HistoryPage()),
-                        );
-                      },
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 10.0),
-
-              // Custom Workout Mode
-              Container(
-                padding: const EdgeInsets.all(10.0),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(16.0),
-                  border:
-                      Border.all(color: const Color(0xFFE0E0E0), width: 1.0),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Chế độ luyện tập',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16,
-                              color: AppColors.xanh_ngoc_dam),
-                        ),
-                        Text(
-                          'Tùy chỉnh chế độ luyện tập của bạn',
-                          style: TextStyle(color: Colors.grey),
-                        ),
-                      ],
-                    ),
-                    IconButton(
-                      icon: const Icon(
-                        Icons.chevron_right_outlined,
-                        color: AppColors.xanh_ngoc_nhat,
-                      ),
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => Navigation(
-                                    tab: 3,
-                                  )),
-                        );
-                      },
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 10.0),
-
-              // Weekly Schedule
-              Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(16.0),
-                  border:
-                      Border.all(color: const Color(0xFFE0E0E0), width: 1.0),
-                ),
-                child: const Padding(
-                  padding: EdgeInsets.all(10.0),
-                  child: Column(
+    return SafeArea(
+      child: Scaffold(
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Streak Section
+                Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.all(10.0),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(16.0),
+                    border:
+                        Border.all(color: const Color(0xFFE0E0E0), width: 1.0),
+                  ),
+                  child: Row(
                     children: [
-                      pickWeek(week: "Tuần này"),
-                      SizedBox(height: 8.0),
-                      WorkoutDayWidget(
-                          day: 'Thứ 2',
-                          status: 'Chưa hoàn thành',
-                          isCompleted: false),
-                      SizedBox(height: 8.0),
-                      WorkoutDayWidget(
-                          day: 'Thứ 3',
-                          status: 'Đã hoàn thành',
-                          isCompleted: true),
-                      SizedBox(height: 8.0),
-                      WorkoutDayWidget(
-                          day: 'Hôm nay',
-                          status: '10 động tác - 10 phút - 500 calo',
-                          isToday: true),
-                      SizedBox(height: 8.0),
-                      WorkoutDayWidget(
-                        day: 'Thứ 5',
-                        status: 'Nghỉ ngơi',
-                        isCompleted: false,
-                        beforeToday: true,
+                      const Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            '3 ngày liên tục',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                                color: AppColors.xanh_ngoc_dam),
+                          ),
+                          Text('Tuần này bạn đã luyện tập 7 lần',
+                              style: TextStyle(color: Colors.grey)),
+                        ],
                       ),
-                      SizedBox(height: 8.0),
-                      WorkoutDayWidget(
-                        day: 'Thứ 6',
-                        status: '10 động tác - 10 phút - 500 calo',
-                        isCompleted: false,
-                        beforeToday: true,
-                      ),
-                      SizedBox(height: 8.0),
-                      WorkoutDayWidget(
-                        day: 'Thứ 7',
-                        status: '10 động tác - 10 phút - 500 calo',
-                        isCompleted: false,
-                        beforeToday: true,
-                      ),
-                      SizedBox(height: 8.0),
-                      WorkoutDayWidget(
-                        day: 'Chủ nhật',
-                        status: '10 động tác - 10 phút - 500 calo',
-                        isCompleted: false,
-                        beforeToday: true,
+                      const Spacer(),
+                      IconButton(
+                        icon: const Icon(
+                          Icons.chevron_right_outlined,
+                          color: AppColors.xanh_ngoc_nhat,
+                        ),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => HistoryPage()),
+                          );
+                        },
                       ),
                     ],
                   ),
                 ),
-              ),
-            ],
+                const SizedBox(height: 10.0),
+
+                // Custom Workout Mode
+                Container(
+                  padding: const EdgeInsets.all(10.0),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(16.0),
+                    border:
+                        Border.all(color: const Color(0xFFE0E0E0), width: 1.0),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Chế độ luyện tập',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                                color: AppColors.xanh_ngoc_dam),
+                          ),
+                          Text(
+                            'Tùy chỉnh chế độ luyện tập của bạn',
+                            style: TextStyle(color: Colors.grey),
+                          ),
+                        ],
+                      ),
+                      IconButton(
+                        icon: const Icon(
+                          Icons.chevron_right_outlined,
+                          color: AppColors.xanh_ngoc_nhat,
+                        ),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Navigation(
+                                      tab: 3,
+                                    )),
+                          );
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 10.0),
+
+                // Weekly Schedule
+                Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(16.0),
+                    border:
+                        Border.all(color: const Color(0xFFE0E0E0), width: 1.0),
+                  ),
+                  child: const Padding(
+                    padding: EdgeInsets.all(10.0),
+                    child: Column(
+                      children: [
+                        pickWeek(week: "Tuần này"),
+                        SizedBox(height: 8.0),
+                        WorkoutDayWidget(
+                            day: 'Thứ 2',
+                            status: 'Chưa hoàn thành',
+                            isCompleted: false),
+                        SizedBox(height: 8.0),
+                        WorkoutDayWidget(
+                            day: 'Thứ 3',
+                            status: 'Đã hoàn thành',
+                            isCompleted: true),
+                        SizedBox(height: 8.0),
+                        WorkoutDayWidget(
+                            day: 'Hôm nay',
+                            status: '10 động tác - 10 phút - 500 calo',
+                            isToday: true),
+                        SizedBox(height: 8.0),
+                        WorkoutDayWidget(
+                          day: 'Thứ 5',
+                          status: 'Nghỉ ngơi',
+                          isCompleted: false,
+                          beforeToday: true,
+                        ),
+                        SizedBox(height: 8.0),
+                        WorkoutDayWidget(
+                          day: 'Thứ 6',
+                          status: '10 động tác - 10 phút - 500 calo',
+                          isCompleted: false,
+                          beforeToday: true,
+                        ),
+                        SizedBox(height: 8.0),
+                        WorkoutDayWidget(
+                          day: 'Thứ 7',
+                          status: '10 động tác - 10 phút - 500 calo',
+                          isCompleted: false,
+                          beforeToday: true,
+                        ),
+                        SizedBox(height: 8.0),
+                        WorkoutDayWidget(
+                          day: 'Chủ nhật',
+                          status: '10 động tác - 10 phút - 500 calo',
+                          isCompleted: false,
+                          beforeToday: true,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

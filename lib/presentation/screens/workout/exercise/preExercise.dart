@@ -28,14 +28,14 @@ class _PreExerciseScreenState extends State<PreExerciseScreen> {
         appBar: AppBar(
           backgroundColor: const Color(0XffE9F6F6),
         ),
-        body: Padding(
-          padding: const EdgeInsets.all(0),
-          child: SingleChildScrollView(
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  padding: const EdgeInsets.all(15.0),
+                  padding: const EdgeInsets.all(16.0),
                   decoration: BoxDecoration(
                     color: const Color(0XffE9F6F6),
                     borderRadius: BorderRadius.circular(8.0),
