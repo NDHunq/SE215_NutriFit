@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:se215_nutrifit/core/configs/theme/app_colors.dart';
+import 'package:se215_nutrifit/presentation/screens/recipe/oneRecipe.dart';
+import 'package:se215_nutrifit/presentation/screens/workout/exercise/preExercise.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:flutter_chart/flutter_chart.dart';
 
@@ -53,7 +55,7 @@ class _HistoryPageState extends State<HistoryPage>
             ),
           ),
           const Padding(
-            padding: EdgeInsets.all(16.0),
+            padding: EdgeInsets.all(10.0),
             child: Text(
               "Lịch sử hàng tuần",
               style: TextStyle(
@@ -64,14 +66,14 @@ class _HistoryPageState extends State<HistoryPage>
             ),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15.0),
+            padding: const EdgeInsets.symmetric(horizontal: 10.0),
             child: Container(
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(10.0),
               ),
               child: Padding(
-                padding: const EdgeInsets.all(15.0),
+                padding: const EdgeInsets.all(10.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -104,12 +106,14 @@ class _HistoryPageState extends State<HistoryPage>
                           icon: Icons.local_fire_department,
                           title: "Luyện tập ngày 23/12",
                           subtitle: "10 động tác - 10 phút - 500 calo",
+                          type: 1,
                         ),
                         SizedBox(height: 8),
                         HistoryDetailItem(
                           icon: Icons.favorite,
                           title: "Bữa sáng kiểu anh",
                           subtitle: "Nguyễn Văn A",
+                          type: 2,
                         ),
                       ],
                     ),
@@ -188,7 +192,7 @@ class TimeTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(16.0),
+      padding: const EdgeInsets.all(10.0),
       child: ChartBar(
         size:
             Size(MediaQuery.of(context).size.width, 300), // Kích thước biểu đồ
@@ -221,7 +225,7 @@ class CaloTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(16.0),
+      padding: const EdgeInsets.all(10.0),
       child: ChartBar(
         size:
             Size(MediaQuery.of(context).size.width, 300), // Kích thước biểu đồ
@@ -282,52 +286,69 @@ class HistoryDetailItem extends StatelessWidget {
   final IconData icon;
   final String title;
   final String subtitle;
+  final int type;
 
   const HistoryDetailItem({
     required this.icon,
     required this.title,
     required this.subtitle,
+    required this.type,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        // Biểu tượng bên trái
-        Container(
-          padding: const EdgeInsets.all(8.0),
-          decoration: BoxDecoration(
-            color: Colors.teal[100], // Màu nền icon
-            shape: BoxShape.circle,
+    return GestureDetector(
+      onTap: () {
+        if (type == 1) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => PreExerciseScreen()),
+          );
+        } else {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => OneRecipe()),
+          );
+        }
+      },
+      child: Row(
+        children: [
+          // Biểu tượng bên trái
+          Container(
+            padding: const EdgeInsets.all(8.0),
+            decoration: BoxDecoration(
+              color: Colors.teal[100], // Màu nền icon
+              shape: BoxShape.circle,
+            ),
+            child: Icon(icon, color: Colors.teal),
           ),
-          child: Icon(icon, color: Colors.teal),
-        ),
-        const SizedBox(width: 16),
-        // Nội dung bên phải
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                title,
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16,
+          const SizedBox(width: 16),
+          // Nội dung bên phải
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                  ),
                 ),
-              ),
-              Text(
-                subtitle,
-                style: TextStyle(
-                  color: Colors.grey[600],
-                  fontSize: 14,
+                Text(
+                  subtitle,
+                  style: TextStyle(
+                    color: Colors.grey[600],
+                    fontSize: 14,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
-        const Icon(Icons.arrow_forward_ios,
-            size: 16, color: Colors.teal), // Mũi tên
-      ],
+          const Icon(Icons.arrow_forward_ios,
+              size: 16, color: Colors.teal), // Mũi tên
+        ],
+      ),
     );
   }
 }

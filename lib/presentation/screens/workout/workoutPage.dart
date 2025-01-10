@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:se215_nutrifit/core/configs/theme/app_colors.dart';
+import 'package:se215_nutrifit/presentation/screens/navigation/navigation.dart';
 import 'package:se215_nutrifit/presentation/screens/plan/planPage.dart';
 import 'package:se215_nutrifit/presentation/screens/workout/exercise/preExercise.dart';
 import 'package:se215_nutrifit/presentation/screens/workout/historyPage.dart';
@@ -10,14 +11,14 @@ class WorkoutPage extends StatelessWidget {
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(10.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Streak Section
               Container(
                 width: double.infinity,
-                padding: const EdgeInsets.all(16.0),
+                padding: const EdgeInsets.all(10.0),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(16.0),
@@ -37,7 +38,7 @@ class WorkoutPage extends StatelessWidget {
                               fontSize: 16,
                               color: AppColors.xanh_ngoc_dam),
                         ),
-                        Text('Bạn đã tập thể dục 7 lần trong tuần này',
+                        Text('Tuần này bạn đã luyện tập 7 lần',
                             style: TextStyle(color: Colors.grey)),
                       ],
                     ),
@@ -62,7 +63,7 @@ class WorkoutPage extends StatelessWidget {
 
               // Custom Workout Mode
               Container(
-                padding: const EdgeInsets.all(16.0),
+                padding: const EdgeInsets.all(10.0),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(16.0),
@@ -96,7 +97,10 @@ class WorkoutPage extends StatelessWidget {
                       onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => PlanPage()),
+                          MaterialPageRoute(
+                              builder: (context) => Navigation(
+                                    tab: 3,
+                                  )),
                         );
                       },
                     ),

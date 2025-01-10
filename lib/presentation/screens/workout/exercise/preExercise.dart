@@ -35,7 +35,7 @@ class _PreExerciseScreenState extends State<PreExerciseScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  padding: const EdgeInsets.all(16.0),
+                  padding: const EdgeInsets.all(15.0),
                   decoration: BoxDecoration(
                     color: const Color(0XffE9F6F6),
                     borderRadius: BorderRadius.circular(8.0),
@@ -58,7 +58,8 @@ class _PreExerciseScreenState extends State<PreExerciseScreen> {
                               Row(
                                 children: [
                                   Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text("10 ",
                                           style: TextStyle(
@@ -73,7 +74,8 @@ class _PreExerciseScreenState extends State<PreExerciseScreen> {
                                   ),
                                   SizedBox(width: 30),
                                   Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text("10 ",
                                           style: TextStyle(
@@ -88,7 +90,8 @@ class _PreExerciseScreenState extends State<PreExerciseScreen> {
                                   ),
                                   SizedBox(width: 40),
                                   Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text("100 ",
                                           style: TextStyle(
@@ -209,7 +212,8 @@ class _PreExerciseScreenState extends State<PreExerciseScreen> {
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: const Color(0XffE9F6F6),
-                          side: const BorderSide(color: AppColors.xanh_ngoc_nhat),
+                          side:
+                              const BorderSide(color: AppColors.xanh_ngoc_nhat),
                           minimumSize:
                               Size(MediaQuery.of(context).size.width, 55),
                           shape: RoundedRectangleBorder(

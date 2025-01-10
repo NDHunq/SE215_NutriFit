@@ -24,7 +24,7 @@ class _RecipePageState extends State<RecipePage> {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15.0),
+          padding: const EdgeInsets.symmetric(horizontal: 010.0),
           child: Column(
             children: [
               Container(
