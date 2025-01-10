@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:se215_nutrifit/core/configs/theme/app_colors.dart';
+import 'package:se215_nutrifit/presentation/screens/navigation/navigation.dart';
 import 'package:se215_nutrifit/presentation/screens/plan/planPage.dart';
 import 'package:se215_nutrifit/presentation/screens/workout/exercise/preExercise.dart';
 import 'package:se215_nutrifit/presentation/screens/workout/historyPage.dart';
@@ -37,7 +38,7 @@ class WorkoutPage extends StatelessWidget {
                               fontSize: 16,
                               color: AppColors.xanh_ngoc_dam),
                         ),
-                        Text('Bạn đã tập thể dục 7 lần trong tuần này',
+                        Text('Tuần này bạn đã luyện tập 7 lần',
                             style: TextStyle(color: Colors.grey)),
                       ],
                     ),
@@ -96,7 +97,10 @@ class WorkoutPage extends StatelessWidget {
                       onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => PlanPage()),
+                          MaterialPageRoute(
+                              builder: (context) => Navigation(
+                                    tab: 3,
+                                  )),
                         );
                       },
                     ),

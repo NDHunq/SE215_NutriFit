@@ -7,105 +7,110 @@ class FinishScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(children: [
-        Column(
-          children: [
-            Container(
-              height: 210,
-              width: double.infinity,
-              decoration: const BoxDecoration(
-                color: AppColors.xanh_ngoc_nhat,
+      body: Stack(
+        children: [
+          Column(
+            children: [
+              Container(
+                height: 210,
+                width: double.infinity,
+                decoration: const BoxDecoration(
+                  color: AppColors.xanh_ngoc_nhat,
+                ),
               ),
-            ),
-          ],
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(height: 50),
-                const Text(
-                  'Tập luyện',
-                  style: TextStyle(
-                    fontSize: 26,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                const Text(
-                  'đã hoàn thành!',
-                  style: TextStyle(
-                    fontSize: 26,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(height: 20),
-                Padding(
-                  padding: const EdgeInsets.all(0),
-                  child: Container(
-                    height: 100,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(20),
+            ],
+          ),
+          SingleChildScrollView(
+            // Thêm cuộn để tránh lỗi overflow
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(height: 50),
+                    const Text(
+                      'Tập luyện',
+                      style: TextStyle(
+                        fontSize: 26,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                      textAlign: TextAlign.center,
                     ),
-                    child: Center(
-                      child: Padding(
-                        padding: const EdgeInsets.only(top: 20.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            _infoCard('10', 'Động tác'),
-                            const SizedBox(width: 5),
-                            _infoCard('10 phút', 'Thời gian'),
-                            const SizedBox(width: 5),
-                            _infoCard('100', 'Calo'),
-                          ],
+                    const Text(
+                      'đã hoàn thành!',
+                      style: TextStyle(
+                        fontSize: 26,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(height: 20),
+                    Padding(
+                      padding: const EdgeInsets.all(0),
+                      child: Container(
+                        height: 100,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: Center(
+                          child: Padding(
+                            padding: const EdgeInsets.only(top: 20.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                _infoCard('10', 'Động tác'),
+                                const SizedBox(width: 5),
+                                _infoCard('10 phút', 'Thời gian'),
+                                const SizedBox(width: 5),
+                                _infoCard('100', 'Calo'),
+                              ],
+                            ),
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ),
-                const SizedBox(height: 20),
-                FeedbackSection(),
-                const SizedBox(height: 20),
-                _updateMetricsSection(),
-                const Spacer(),
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => Navigation(
-                                  tab: 1,
-                                )));
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.xanh_ngoc_nhat,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30),
+                    const SizedBox(height: 20),
+                    FeedbackSection(),
+                    const SizedBox(height: 20),
+                    _updateMetricsSection(),
+                    const SizedBox(height: 20),
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Navigation(
+                                      tab: 1,
+                                    )));
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AppColors.xanh_ngoc_nhat,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 16, horizontal: 80),
+                        minimumSize: const Size(
+                            double.infinity, 60), // Set the height to 60
+                      ),
+                      child: const Text(
+                        'Tiếp theo',
+                        style: TextStyle(fontSize: 18, color: Colors.white),
+                      ),
                     ),
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 16, horizontal: 80),
-                    minimumSize:
-                        const Size(double.infinity, 60), // Set the height to 50
-                  ),
-                  child: const Text(
-                    'Tiếp theo',
-                    style: TextStyle(fontSize: 18, color: Colors.white),
-                  ),
+                    const SizedBox(height: 20),
+                  ],
                 ),
-                const SizedBox(height: 20),
-              ],
+              ),
             ),
           ),
-        ),
-      ]),
+        ],
+      ),
     );
   }
 }
