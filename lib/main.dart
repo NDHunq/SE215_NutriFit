@@ -30,7 +30,7 @@ class _MyAppState extends State<MyApp> {
         useMaterial3: true,
       ),
 
-      home: const Navigation(),
+      home: const SignInPage(),
       debugShowCheckedModeBanner: false, // Bỏ nhãn DEBUG
     );
   }
